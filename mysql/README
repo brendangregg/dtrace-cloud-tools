@@ -1,0 +1,9 @@
+MySQL Scripts
+
+mysql_pid_*.d	scripts that use the pid provider to trace a single
+		mysqld instance.
+
+mysql_*.d	scripts that use the mysql provider probes (if available)
+		to trace all runinng mysqlds.
+
+innodb_*.d	trace innodb internals using the pid provider.
