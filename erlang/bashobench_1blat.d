@@ -3,7 +3,8 @@
  * bashobench_1blat.d	Basho bench 1st byte latency.d
  *
  * Measures the time from a write on a FD, to the 1st successful read
- * from the same FD.
+ * from the same FD.  This relies on the syscalls used by the Erlang beam.smp
+ * implementation, and may not work on different beam versions.
  */
 
 syscall::writev:entry
