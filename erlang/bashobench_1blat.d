@@ -10,6 +10,7 @@
 syscall::writev:entry
 /execname == "beam.smp"/
 {
+	/* key on pid and FD + 1 */
 	ts[pid, arg0 + 1] = timestamp;
 }
 
@@ -20,7 +21,7 @@ syscall::recv:entry
 }
 
 syscall::recv:return
-/self->fd && ts[pid, self->fd + 1]/
+/self->fd && ts[pid, self->fd]/
 {
 	@["ns"] = quantize(timestamp - ts[pid, self->fd]);
 	ts[pid, self->fd] = 0;
