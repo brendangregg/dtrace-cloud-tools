@@ -1,6 +1,10 @@
 #!/usr/sbin/dtrace -s
 /*
  * bashobench_1blat.d	Basho bench 1st byte latency.d
+ *
+ * This works by tracing the time from a writev() to a FD, to when the
+ * first recv() on the same FD completes.  These syscalls are an
+ * implementation detail of Erlang/beam.smp, and may change at any time.
  */
 
 syscall::writev:entry
