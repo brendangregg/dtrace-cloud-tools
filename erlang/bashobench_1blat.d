@@ -17,20 +17,20 @@ syscall::writev:entry
 syscall::recv:entry
 /ts[pid, arg0 + 1]/
 {
-	self->fd = arg0 + 1;
+	self->fd1 = arg0 + 1;
 }
 
 syscall::recv:return
-/self->fd && ts[pid, self->fd]/
+/self->fd1 && ts[pid, self->fd1]/
 {
-	@["ns"] = quantize(timestamp - ts[pid, self->fd]);
-	ts[pid, self->fd] = 0;
+	@["ns"] = quantize(timestamp - ts[pid, self->fd1]);
+	ts[pid, self->fd1] = 0;
 }
 
 syscall::recv:return
-/self->fd/
+/self->fd1/
 {
-	self->fd = 0;
+	self->fd1 = 0;
 }
 
 tick-1s
