@@ -8,7 +8,7 @@ erlang*:::message-queued
 	@["qlen"] = quantize(arg2);
 }
 
-tick-1s
+profile:::tick-1s
 {
 	printa(@);
 	trunc(@);

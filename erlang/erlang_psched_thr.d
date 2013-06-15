@@ -19,7 +19,7 @@ erlang*:::process-unscheduled
 	self->ts = 0;
 }
 
-tick-1s
+profile:::tick-1s
 {
 	printa(@);
 	trunc(@);

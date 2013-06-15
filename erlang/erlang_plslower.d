@@ -11,7 +11,7 @@
 #pragma D option quiet
 #pragma D option switchrate=4
 
-BEGIN
+dtrace:::BEGIN
 {
 	min_ns = $1 ? $1 * 1000000 : 1000000;
 	printf("Tracing Erlang process times slower than %d ms.\n",

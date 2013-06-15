@@ -1,8 +1,13 @@
 #!/usr/sbin/dtrace -s
+/*
+ * erlang_gc.d		Time Erlang garbage collect.
+ *
+ * See otp/erts/emulator/beam/erlang_dtrace.d for probe details.
+ */
 
 #pragma D option quiet
 
-BEGIN
+dtrace:::BEGIN
 {
 	trace("Tracing Erlang GC time.\n")
 }
@@ -11,8 +16,8 @@ erlang*:::gc_major-start,
 erlang*:::gc_minor-start
 {
 	/*
-	 * Thread local variable, since erts_garbage_collect() looks
-	 * like it begins and ends on the same thread.
+	 * I'm using a thread local variable since erts_garbage_collect()
+	 * like like it begins and ends on the same thread.
 	 */
 	self->ts = timestamp;
 }
@@ -24,7 +29,7 @@ erlang*:::gc_minor-end
 	@[probename, "ns"] = quantize(timestamp - self->ts);
 }
 
-tick-1s
+profile:::tick-1s
 {
 	printa(@);
 	trunc(@);

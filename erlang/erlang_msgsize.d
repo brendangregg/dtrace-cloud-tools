@@ -19,7 +19,7 @@ erlang*:::message-queued
 	@[probename, "words"] = quantize((int)arg1);
 }
 
-tick-1s
+profile:::tick-1s
 {
 	printa(@);
 	trunc(@);

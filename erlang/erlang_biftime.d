@@ -1,4 +1,9 @@
 #!/usr/sbin/dtrace -s
+/*
+ * erlang_biftime.d	Time built-in function (BIF) calls.
+ *
+ * See otp/erts/emulator/beam/erlang_dtrace.d for probe details.
+ */
 
 #pragma D option dynvarsize=8m
 
@@ -14,7 +19,7 @@ erlang*:::bif-return
 	ts[copyinstr(arg0)] = 0;
 }
 
-tick-1s
+profile:::tick-1s
 {
 	printa(@); trunc(@);
 }

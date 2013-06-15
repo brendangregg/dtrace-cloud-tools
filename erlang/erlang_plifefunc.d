@@ -5,7 +5,7 @@
 
 #pragma D option dynvarsize=8m
 
-BEGIN
+dtrace:::BEGIN
 {
 	trace("Tracing Erlang process times. Ctrl-C to end.\n");
 }

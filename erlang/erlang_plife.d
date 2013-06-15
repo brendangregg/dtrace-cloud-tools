@@ -17,7 +17,7 @@ erlang*:::process-exit
 	ts[copyinstr(arg0)] = 0;
 }
 
-tick-1s
+profile:::tick-1s
 {
 	printa(@); trunc(@);
 }
