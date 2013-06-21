@@ -18,5 +18,5 @@ tcp:::connect-refused
 tcp:::accept-refused
 {
 	printf("%s -> %s:%d", args[3]->tcps_raddr,
-	    args[3]->tcp_laddr, args[3]->tcps_lport);
+	    args[3]->tcps_laddr, args[3]->tcps_lport);
 }
