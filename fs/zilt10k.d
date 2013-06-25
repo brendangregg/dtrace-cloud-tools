@@ -15,7 +15,7 @@
 
 BEGIN
 {
-	printf("ENDTIME(us) LATENCY(us) TYPE SIZE(bytes) ZONENAME PROCESS\n");
+	printf("ENDTIME(us) LATENCY(ns) TYPE SIZE(bytes) ZONENAME PROCESS\n");
 	start = timestamp;
 	n = 0;
 }
@@ -51,7 +51,7 @@ fbt::zfs_readdir:return, fbt::zfs_getattr:return
 /self->ts/
 {
 	printf("%d %d %s %d %s %s\n",
-	    (timestamp - start) / 1000, (timestamp - self->ts) / 1000,
+	    (timestamp - start) / 1000, timestamp - self->ts,
 	    probefunc + 4, self->b, zonename, execname);
 	self->ts = 0;
 	self->b = 0;
