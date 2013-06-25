@@ -2,6 +2,9 @@
 /*
  * tcpretranssnoop.d	Trace TCP retransmitted segments with details.
  *
+ * This only traces timer-based retransmits, and not fast retransmits.
+ * See tcpsackretrans.d.
+ *
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the

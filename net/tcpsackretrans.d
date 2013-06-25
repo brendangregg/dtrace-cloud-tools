@@ -1,9 +1,8 @@
 #!/usr/sbin/dtrace -s
 /*
- * tcpretranssnoop_sdc5.d	Trace TCP retransmitted segments with details.
+ * tcpsackretrans.d	Trace TCP SACK fast retransmits with details.
  *
- * This only traces timer-based retransmits, and not fast retransmits.
- * See tcpsackretrans.d.
+ * SEE ALSO: tcpretranssnoop*.d
  *
  * CDDL HEADER START
  *
@@ -30,11 +29,12 @@
  * Copyright (c) 2012 Brendan Gregg, All rights reserved.
  *
  * TESTED: this fbt provider based script may only work on some OS versions.
- *	121: ok
+ *	sdc6: ok
  */
 
 #pragma D option quiet
 #pragma D option switchrate=10hz
+self string retrans;
 
 dtrace:::BEGIN
 {
@@ -53,23 +53,24 @@ dtrace:::BEGIN
 	tcpstate[5] = "TCPS_FIN_WAIT_2";
 	tcpstate[6] = "TCPS_TIME_WAIT";
 
-	printf("%-20s %-17s %-16s %-16s %-6s\n", "TIME", "TCP_STATE",
-	    "SRC", "DST", "PORT");
+	printf("%-20s %-17s %-16s %-16s %-6s\n", "TIME",
+	    "TCP_STATE", "SRC", "DST", "PORT");
 }
 
-fbt::tcp_timer:entry  { self->in_tcp_timer = 1; self->retrans = 0; }
-fbt::tcp_timer:return { self->in_tcp_timer = 0; self->retrans = 0; }
+/* SACK fast retrinsmits */
+fbt::tcp_sack_rexmit:entry  { self->tcp = args[0]; }
+fbt::tcp_sack_rexmit:return { self->tcp = 0; }
 
-mib:::tcpRetransSegs  { self->retrans = 1; }
-
-fbt::tcp_send_data:entry
-/self->in_tcp_timer && self->retrans/
+mib:::tcpOutSackRetransSegs
+/self->tcp/
 {
-        this->iph = (ipha_t *)args[2]->b_rptr;
-	this->state = tcpstate[args[0]->tcp_state] != NULL ?
-	    tcpstate[args[0]->tcp_state] : "<unknown>";
-	printf("%-20Y %-17s %-16s %-16s %-6d\n", walltimestamp, this->state,
-	    inet_ntoa(&this->iph->ipha_src), inet_ntoa(&this->iph->ipha_dst),
-	    ntohs(args[0]->tcp_connp->u_port.tcpu_ports.tcpu_fport));
-	self->retrans = 0;
+	this->state = tcpstate[self->tcp->tcp_state] != NULL ?
+	    tcpstate[self->tcp->tcp_state] : "<unknown>";
+	printf("%-20Y %-17s %-16s %-16s %-6d\n", walltimestamp,
+	    this->state,
+	    /* just look at it. LOOK at it. */
+	    inet_ntoa(&self->tcp->tcp_connp->connua_v6addr.connua_laddr._S6_un._S6_u32[3]),
+	    inet_ntoa(&self->tcp->tcp_connp->connua_v6addr.connua_faddr._S6_un._S6_u32[3]),
+	    ntohs(self->tcp->tcp_connp->u_port.connu_ports.connu_fport));
+	self->tcp = 0;
 }
