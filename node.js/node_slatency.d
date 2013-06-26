@@ -1,6 +1,6 @@
 #!/usr/sbin/dtrace -s
 /*
- * nodejs_latency.d	Summarize node.js HTTP server latency.
+ * node_slatency.d	Summarize node.js HTTP server latency.
  *
  * Requires the node DTrace provider, and a working version of the node
  * translator (/usr/lib/dtrace/node.d).
