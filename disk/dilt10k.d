@@ -4,6 +4,8 @@
  *
  * This emits basic details for consumption by other tools.  It ideally captures
  * at least 10,000 I/O.  It has a 15 minute timeout if that is not possible.
+ *
+ * 25-Jun-2013	Brendan Gregg	Created this.
  */
 
 #pragma D option quiet

@@ -4,6 +4,8 @@
  *
  * Requires the node DTrace provider, and a working version of the node
  * translator (/usr/lib/dtrace/node.d).
+ *
+ * 25-Jun-2013	Brendan Gregg	Created this (lost the originals).
  */
 
 node*:::http-server-request
