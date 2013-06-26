@@ -1,0 +1,19 @@
+node.js
+
+Some short scripts for node.js tracing.  These require the node DTrace provider,
+and a working version of the translator (/usr/lib/dtrace/node.d).
+
+You should also check out:
+
+- Robert Mustacchi's post on the node.js DTrace provider:
+  http://dtrace.org/blogs/rm/2011/03/01/dtrace-probes-for-node-v0-4-x/
+
+- Dave Pacheco's nhttpsnoop
+  https://github.com/davepacheco/nhttpsnoop
+
+- Dave Pacheco's post on profiling node.js stack traces using DTrace (with my
+  flame graphs :)
+  http://dtrace.org/blogs/dap/2012/04/25/profiling-node-js/
+
+- Bryan Cantrill's Velocity talk on node.js and DTrace
+  http://www.slideshare.net/bcantrill/instrumenting-the-realtime-web-nodejs-in-production
