@@ -35,7 +35,6 @@ node*:::http-server-response
 /self->ts && (this->delta = timestamp - self->ts) > min_ns/
 {
         printf("%-20Y %-6d %6d %s\n", walltimestamp, pid,
-	    this->delta / 1000000,
-	    (xlate <httpd_rqinfo_t *>((dthttpd_t *)arg0))->rq_uri);
+	    this->delta / 1000000, args[1]->rq_uri);
 	self->ts = 0;
 }
