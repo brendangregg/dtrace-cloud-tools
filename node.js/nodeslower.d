@@ -51,17 +51,14 @@ dtrace:::BEGIN
 
 node*:::http-server-request
 {
-	this->fd = (xlate <node_connection_t *>
-	    ((node_dtrace_connection_t *)arg1))->fd;
-	url[pid, this->fd] = (xlate <node_http_request_t *>
-	    ((node_dtrace_http_request_t *)arg0))->url;
+	this->fd = args[1]->fd;
+	url[pid, this->fd] = args[0]->url;
 	ts[pid, this->fd] = timestamp;
 }
 
 node*:::http-server-response
 {
-	this->fd = ((xlate <node_connection_t *>
-	    ((node_dtrace_connection_t *)arg0))->fd);
+	this->fd = args[0]->fd;
 	/* FALLTHRU */
 }
 

@@ -10,19 +10,12 @@
 
 node*:::http-server-request
 {
-	this->fd = (xlate <node_connection_t *>((node_dtrace_connection_t *)arg1))->fd;
-	ts[pid, this->fd] = timestamp;
+	ts[pid, args[1]->fd] = timestamp;
 }
 
 node*:::http-server-response
-{
-	this->fd = ((xlate <node_connection_t *>((node_dtrace_connection_t *)arg0))->fd);
-	/* FALLTHRU */
-}
-
-node*:::http-server-response
-/this->start = ts[pid, this->fd]/
+/this->start = ts[pid, args[0]->fd]/
 {
 	@["ns"] = quantize(timestamp - this->start);
-	ts[pid, this->fd] = 0;
+	ts[pid, args[0]->fd] = 0;
 }

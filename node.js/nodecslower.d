@@ -51,17 +51,14 @@ dtrace:::BEGIN
 
 node*:::http-client-request
 {
-	this->fd = (xlate <node_connection_t *>
-	    ((node_dtrace_connection_t *)arg1))->fd;
-	url[pid, this->fd] = (xlate <node_http_request_t *>
-	    ((node_dtrace_http_request_t *)arg0))->url;
+	this->fd = args[1]->fd;
+	url[pid, this->fd] = args[0]->url;
 	ts[pid, this->fd] = timestamp;
 }
 
 node*:::http-client-response
 {
-	this->fd = ((xlate <node_connection_t *>
-	    ((node_dtrace_connection_t *)arg0))->fd);
+	this->fd = args[0]->fd;
 	/* FALLTHRU */
 }
 
@@ -69,10 +66,9 @@ node*:::http-client-response
 /(this->start = ts[pid, this->fd]) &&
     (this->delta = timestamp - this->start) > min_ns/
 {
-	this->raddr = ((xlate <node_connection_t *>
-	    ((node_dtrace_connection_t *)arg0))->remoteAddress);
         printf("%-20Y %-6d %6d %s %s\n", walltimestamp, pid,
-	    this->delta / 1000000, this->raddr, url[pid, this->fd]);
+	    this->delta / 1000000, args[0]->remoteAddress,
+	    url[pid, this->fd]);
 }
 
 node*:::http-client-response

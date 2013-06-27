@@ -19,9 +19,7 @@ dtrace:::BEGIN
 
 node*:::http-server-request
 {
-	this->url = (xlate <node_http_request_t *>
-	    ((node_dtrace_http_request_t *)arg0))->url;
-	@[this->url] = count();
+	@[args[0]->url] = count();
 }
 
 profile:::tick-10s
