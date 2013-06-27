@@ -24,7 +24,7 @@ node*:::http-server-request
 	@[this->url] = count();
 }
 
-tick-10s
+profile:::tick-10s
 {
 	printf("\n%Y:\n", walltimestamp);
 	printa("   %@6d %s\n", @);
