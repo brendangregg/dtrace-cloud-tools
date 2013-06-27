@@ -12,6 +12,8 @@
  * you may need to invoke this with the actual location with -L, eg:
  * dtrace -L /opt/local/lib/dtrace -s httpdslower.d 
  *
+ * This script will trace all running instances of Apache.
+ *
  * 26-Jun-2013	Brendan Gregg	Created this.
  */
 
