@@ -4,7 +4,7 @@ The lib directory can be sourced for argument translation, and provides
 variables goarg0..9 for function arguments. Eg, to frequency count the first
 argument to the foo() function:
 
-dtrace -Llib -n 'pid$target::main.foo:entry { @[goarg0] = count(); }' -p `pgrep -x loop`
+dtrace -Llib -n 'pid$target::main.foo:entry { @[goarg0] = count(); }' -p PID
 
 The go.d file in the lib directory can also be copied into the default DTrace
 library search path, which is usually /usr/lib/dtrace, so that "-Llib" is no
