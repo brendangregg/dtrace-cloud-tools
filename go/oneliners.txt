@@ -1,0 +1,38 @@
+# function counts:
+dtrace -n 'pid$target:a.out::entry { @[probefunc] = count(); }' -p PID
+
+# function counts, main package only:
+dtrace -n 'pid$target::main.*:entry { @[probefunc] = count(); }' -p PID
+
+# package function counts by called package name:
+dtrace -n 'pid$target:a.out::entry /strstr(probefunc, ".") != NULL/ { @[strtok(probefunc, ".")] = count(); }' -p PID
+
+# function timing, main package functions only:
+dtrace -n 'pid$target::main.*:entry { self->ts = timestamp; } pid$target::main.*:return /self->ts/ { @[probefunc, "ns"] = quantize(timestamp - self->ts); }' -p PID
+
+# syscall counts, for one PID:
+dtrace -n 'syscall:::entry /pid == $target/ { @[probefunc] = count(); }' -p PID
+
+# syscall counts, all go processes (needs kernel access):
+dtrace -n 'syscall:::entry /curthread->t_procp->p_parent->p_user.u_comm == "go"/ { @[probefunc] = count(); }'
+
+# go's runtime notion of syscalls, counts:
+dtrace -n 'pid$target:a.out:syscall.*:entry { @[probefunc] = count(); }' -p PID
+
+# runtime call counts:
+dtrace -n 'pid$target:a.out:runtime.*:entry { @[probefunc] = count(); }' -p PID
+
+# counting arg0 for function foo():
+dtrace -n 'pid$target::main.foo:entry { @[*(uintptr_t *)copyin(uregs[R_SP] + 1 * sizeof (uintptr_t), sizeof (uintptr_t))] = count(); }' -p PID
+
+# tracing function flow for all go functions:
+dtrace -Fn 'pid$target:a.out::entry,pid$target:a.out::return' -p PID
+
+# tracing function flow for all main package functions:
+dtrace -Fn 'pid$target::main.*:entry,pid$target::main.*:return' -p PID
+
+# tracing function flow for all go functions, correct output ordering:
+dtrace -x temporal -Fn 'pid$target:a.out::entry,pid$target:a.out::return' -p PID
+
+# tracing function flow for all main package functions, correct output ordering:
+dtrace -x temporal -Fn 'pid$target::main.*:entry,pid$target::main.*:return' -p PID

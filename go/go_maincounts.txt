@@ -1,0 +1,20 @@
+# ./go_maincounts.d -p 40148 1
+Tracing PID 40148; output every 1 secs.
+
+2013 Nov 14 23:02:41:
+
+  main.processreq                                                5657
+
+2013 Nov 14 23:02:42:
+
+  main.processreq                                                6777
+
+2013 Nov 14 23:02:43:
+
+  main.processreq                                                6562
+
+2013 Nov 14 23:02:44:
+
+  main.processreq                                                6496
+
+[...]

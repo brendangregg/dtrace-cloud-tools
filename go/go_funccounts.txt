@@ -1,0 +1,56 @@
+# ./go_funccounts.d -p 40148
+Tracing PID 40148; Ctrl-C to stop.
+^C
+
+  main.processreq                                                 215
+  retake                                                          236
+  runtime.atomicload64                                            236
+  runtime.nanotime                                                236
+  runtime.nanotime1                                               236
+  runtime.usleep                                                  236
+  runtime.sysvicall6                                              472
+  assertE2Tret                                                  10741
+  copyout                                                       10741
+  fmt.(*fmt).clearflags                                         10741
+  fmt.(*fmt).init                                               10741
+  fmt.(*pp).doPrintf                                            10741
+  gosave                                                        10741
+  lockOSThread                                                  10741
+  os.(*File).Write                                              10741
+  os.(*File).write                                              10741
+  runtime.assertE2T                                             10741
+  runtime.atomicstore                                           10741
+  runtime.cgocall                                               10741
+  runtime.entersyscall                                          10741
+  runtime.getcallerpc                                           10741
+  runtime.getcallersp                                           10741
+  runtime.lockOSThread                                          10741
+  runtime.memcopy64                                             10741
+  save                                                          10741
+  syscall.Syscall                                               10741
+  syscall.Write                                                 10741
+  syscall.write                                                 10741
+  endcgo                                                        10742
+  exitsyscallfast                                               10742
+  fmt.(*cache).get                                              10742
+  fmt.(*cache).put                                              10742
+  fmt.(*pp).free                                                10742
+  fmt.Fprintf                                                   10742
+  fmt.Printf                                                    10742
+  fmt.newPrinter                                                10742
+  os.epipecheck                                                 10742
+  runtime.cas                                                   10742
+  runtime.exitsyscall                                           10742
+  runtime.unlockOSThread                                        10742
+  sync/atomic.StoreInt32                                        10742
+  sync/atomic.StoreUint32                                       10742
+  unlockOSThread                                                10742
+  runtime.atomicload                                            10977
+  runtime.asmcgocall                                            11213
+  runtime.asmsysvicall6                                         11213
+  sync/atomic.AddInt32                                          21483
+  sync/atomic.AddUint32                                         21483
+  sync.(*Mutex).Lock                                            21484
+  sync.(*Mutex).Unlock                                          21484
+  sync/atomic.CompareAndSwapInt32                               21484
+  sync/atomic.CompareAndSwapUint32                              21484
