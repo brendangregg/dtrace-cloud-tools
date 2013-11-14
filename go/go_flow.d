@@ -4,6 +4,11 @@
  *
  * USAGE: goflow.d -p PID [interval]
  *
+ * WARNING: This traces every go function and prints details for each, and
+ * as such is likely to cause significant overhead, slowing the target.
+ *
+ * NOTE: The output may be shuffled slightly; see comment in script.
+ *
  * An optional interval can be provided, which will print a summary
  * every interval seconds.
  */
