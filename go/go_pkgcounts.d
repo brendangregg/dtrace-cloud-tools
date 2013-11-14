@@ -1,6 +1,6 @@
 #!/usr/sbin/dtrace -s
 /*
- * go_pkgcounts.d	Summarize function call counts
+ * go_pkgcounts.d	Summarize function call counts by package name
  *
  * USAGE: go_pkgcounts.d -p PID [interval]
  *
