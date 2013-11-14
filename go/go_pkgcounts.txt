@@ -1,0 +1,43 @@
+# ./go_pkgcounts.d -p 40148 1
+Tracing PID 40148; output every 1 secs.
+
+2013 Nov 14 23:22:16:
+
+  main                                                             46
+  os                                                             6855
+  syscall                                                        6855
+  sync                                                           9140
+  fmt                                                           20565
+  sync/atomic                                                   22850
+  runtime                                                       33072
+
+2013 Nov 14 23:22:17:
+
+  main                                                             42
+  syscall                                                        6386
+  os                                                             6387
+  sync                                                           8516
+  fmt                                                           19161
+  sync/atomic                                                   21290
+  runtime                                                       30860
+
+2013 Nov 14 23:22:18:
+
+  main                                                             48
+  os                                                             7203
+  syscall                                                        7204
+  sync                                                           9604
+  fmt                                                           21609
+  sync/atomic                                                   24010
+  runtime                                                       34702
+
+2013 Nov 14 23:22:19:
+
+  main                                                             48
+  syscall                                                        7194
+  os                                                             7195
+  sync                                                           9592
+  fmt                                                           21582
+  sync/atomic                                                   23982
+
+[...]
