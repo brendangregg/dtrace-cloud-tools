@@ -1,10 +1,13 @@
 #!/usr/sbin/dtrace -s
 /*
- * gofunccounts.d	Summarize function call counts
+ * go_funccounts.d	Summarize function call counts
  *
  * USAGE: gofunccounts.d -p PID [interval]
  *
  * This traces all functions in all packages in go.
+ *
+ * WARNING: For busy programs, this is likely to cause significant overhead,
+ * slowing the target.
  *
  * An optional interval can be provided, which will print a summary
  * every interval seconds.
