@@ -6,6 +6,9 @@
  *
  * This traces all functions in all packages in go.
  *
+ * WARNING: This traces all functions, which can cause significant overhead
+ * slowing the target.
+ *
  * An optional interval can be provided, which will print a summary
  * every interval seconds.
  */
