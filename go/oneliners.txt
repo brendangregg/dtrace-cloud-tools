@@ -10,6 +10,9 @@ dtrace -n 'pid$target:a.out::entry /strstr(probefunc, ".") != NULL/ { @[strtok(p
 # function timing, main package functions only:
 dtrace -n 'pid$target::main.*:entry { self->ts = timestamp; } pid$target::main.*:return /self->ts/ { @[probefunc, "ns"] = quantize(timestamp - self->ts); }' -p PID
 
+# profiling on-CPU user level function at 99 Hertz:
+dtrace -n 'profile-99 /arg1 && pid == $target/ { @[ufunc(arg1)] = count(); }' -p PID
+
 # syscall counts, for one PID:
 dtrace -n 'syscall:::entry /pid == $target/ { @[probefunc] = count(); }' -p PID
 
