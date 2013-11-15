@@ -1,0 +1,30 @@
+# ./go_mainflow.d -p 17649
+CPU    PID  DELTA(us)          PACKAGE FUNCTION
+ 14  36030          8             main -> .domorestuff
+ 14  36030        971             main   -> .dostuff
+ 14  36030        194             main   <- .dostuff
+ 14  36030         23             main   -> .dostuff
+ 14  36030        162             main   <- .dostuff
+ 14  36030         14             main <- .domorestuff
+ 14  36030         14             main -> .domorestuff
+ 14  36030        783             main   -> .dostuff
+ 14  36030        173             main   <- .dostuff
+ 14  36030         14             main   -> .dostuff
+ 14  36030        163             main   <- .dostuff
+ 14  36030         14             main <- .domorestuff
+ 14  36030         14             main -> .domorestuff
+ 14  36030        765             main   -> .dostuff
+ 14  36030        196             main   <- .dostuff
+ 14  36030         14             main   -> .dostuff
+ 14  36030        234             main   <- .dostuff
+ 14  36030         15             main <- .domorestuff
+ 14  36030         15             main -> .domorestuff
+ 14  36030        918             main   -> .dostuff
+ 14  36030        158             main   <- .dostuff
+ 14  36030         12             main   -> .dostuff
+ 14  36030        160             main   <- .dostuff
+ 14  36030         13             main <- .domorestuff
+ 14  36030         13             main -> .domorestuff
+ 14  36030        757             main   -> .dostuff
+ 14  36030        158             main   <- .dostuff
+[...]
