@@ -9,3 +9,7 @@ dtrace -Llib -n 'pid$target::main.foo:entry { @[goarg0] = count(); }' -p PID
 The go.d file in the lib directory can also be copied into the default DTrace
 library search path, which is usually /usr/lib/dtrace, so that "-Llib" is no
 longer required.
+
+NOTE: For these to work, they need a fix for the DTrace pid provider so that
+it can handle UTF-8 characters:
+https://github.com/joyent/illumos-joyent/commit/4a6f2ba4e313d3ba11ec5fd34d3c18c9c28be355
